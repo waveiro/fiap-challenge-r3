@@ -1,0 +1,22 @@
+:host {
+  background-color: #9544ab;
+  width: 80px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 4px;
+  height: 100px;
+  color: #c5c0b9;
+}
+
+.menu-item {
+  &__icon {
+    font-size: 28px;
+  }
+
+  &__text {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+}
