@@ -1,0 +1,7 @@
+{
+  "name": "fiap-challenge-r3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
