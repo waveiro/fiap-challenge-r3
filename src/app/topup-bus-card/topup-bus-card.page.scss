@@ -1,0 +1,162 @@
+.topup {
+  &__action {
+    --background: #ffffff;
+    --color: #83259f;
+    border-top: 1px #cccccc solid;
+    font-weight: bold;
+    border-bottom: 1px #cccccc solid;
+    --background-activated: #d8d5d5;
+    --background-focused: #d8d5d5;
+    --background-hover: #d8d5d5;
+    text-transform: uppercase;
+  }
+}
+
+.step {
+  width: 80%;
+  margin: auto;
+
+  &--hidden {
+    display: none;
+  }
+
+  &__icon {
+    width: 120px;
+    margin: 0 auto;
+  }
+
+  &__success {
+    text-align: center;
+    height: 70vh;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-top: 5vh;
+  }
+
+  &__card-number {
+    &-input {
+      font-size: 24px;
+      margin-top: 36px;
+      caret-color: #83259f;
+    }
+  }
+
+  &__password {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    justify-content: space-evenly;
+
+    &-inputs {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    &-input {
+      border: solid 1px #cccccc;
+      border-radius: 4px;
+      flex-basis: 20%;
+      max-width: 20%;
+      -webkit-text-security: disc;
+      caret-color: #83259f;
+    }
+  }
+
+  &__report {
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    justify-content: space-evenly;
+
+    &-header {
+      text-align: center;
+      border-bottom: 1px #cccccc solid;
+    }
+
+    &-item {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-title {
+      display: block;
+      margin-bottom: 16px;
+      font-weight: normal;
+    }
+
+    &-value {
+      display: block;
+      margin-bottom: 16px;
+      font-size: 24px;
+      color: #83259f;
+    }
+  }
+
+  &__header {
+    font-size: 20px;
+    font-weight: bold;
+
+    &--mb24 {
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    &--2x {
+      font-size: 32px;
+    }
+  }
+
+  &__cards {
+    margin-top: 16px;
+  }
+
+  &__payment-method {
+    border-top: 1px solid #d8d5d5;
+    height: 40vh;
+    display: flex;
+
+    &-content {
+      margin-left: 16px;
+    }
+
+    &-title {
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    &-subtitle {
+      color: #808080;
+      font-size: 14px;
+    }
+
+    &-icon {
+      color: #808080;
+    }
+  }
+}
+
+.text {
+  &--dotted {
+    color: #83259f;
+    border-bottom: 1px dotted #83259f;
+    text-decoration: none;
+  }
+
+  &--highlited {
+    color: #83259f;
+    font-weight: bold;
+  }
+}
+
+ion-radio {
+  --color-checked: #83259f;
+}
+
+ion-back-button {
+  --color: #cccccc;
+}
+
+ion-header {
+  padding-left: 12px;
+}

@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
 
-  constructor() { }
+  constructor(private readonly navController: NavController) { }
 
-  ngOnInit() {}
+  goToBusCardTopUp() {
+    this.navController.navigateForward('topup-bus-card');
+  }
 
 }

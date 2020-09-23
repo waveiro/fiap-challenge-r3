@@ -1,0 +1,179 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button #backButton defaultHref="home" icon="close" text=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content>
+    <section class="step" [class.step--hidden]="step!==TOPUP_STEPS.cardType">
+      <ion-label class="step__header">
+        Qual cartão deseja recarregar?
+      </ion-label>
+      <ion-list class="step__cards">
+        <ion-radio-group (ionChange)=cardSelected($event)>
+          <ion-item lines="none">
+            <ion-label>Bilhete Único</ion-label>
+            <ion-radio mode="md" slot="start" [value]="cardTypes.BilheteUnico"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label>BOM</ion-label>
+            <ion-radio mode="md" slot="start" [value]="cardTypes.BOM"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </section>
+
+    <section class="step" [class.step--hidden]="step!==TOPUP_STEPS.cardNumber">
+      <ion-label class="step__header">
+        Qual o número do cartão que será carregado?
+      </ion-label>
+
+      <ion-input class="step__card-number-input" #cardNumberField type="number" [(ngModel)]="model.cardNumber"
+        inputmode="numeric"></ion-input>
+    </section>
+
+    <section class="step" [class.step--hidden]="step!==TOPUP_STEPS.valueToTopUp">
+      <ion-label class="step__header">
+        Qual valor deseja recarregar?
+      </ion-label>
+      <ion-list class="step__cards">
+        <ion-radio-group (ionChange)=valueToTopupSelected($event)>
+          <ion-item lines="none" *ngFor="let value of valuesToTopUp">
+            <ion-label>{{value | currency:'BRL'}}</ion-label>
+            <ion-radio mode="md" slot="start" [value]="value"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </section>
+
+    <section class="step" [class.step--hidden]="step!==TOPUP_STEPS.paymentMethod">
+      <ion-label class="step__header step__header--mb24">
+        Qual método de pagamento?
+      </ion-label>
+
+      <ion-item button lines="none" class="step__payment-method"
+        (click)="paymentMethodSelected(paymentMethods.checkingAccount)">
+        <div class="step__payment-method-icon">
+          <ion-icon name="cash-outline" slot="start" size="large"></ion-icon>
+        </div>
+        <div class="step__payment-method-content">
+          <ion-label class="step__payment-method-title">Conta</ion-label>
+          <ion-label class="step__payment-method-subtitle">Saldo disponível: R$ 17,600.00</ion-label>
+        </div>
+      </ion-item>
+
+      <ion-item button lines="none" class="step__payment-method"
+        (click)="paymentMethodSelected(paymentMethods.creditCard)">
+        <div class="step__payment-method-icon">
+          <ion-icon name="card-outline" slot="start" size="large"></ion-icon>
+        </div>
+        <div class="step__payment-method-content">
+          <ion-label class="step__payment-method-title">Cartão de crédito</ion-label>
+          <ion-label class="step__payment-method-subtitle">Limite disponível: R$ 10,500.00</ion-label>
+        </div>
+      </ion-item>
+
+    </section>
+    <section class="step" [class.step--hidden]="step!==TOPUP_STEPS.report">
+      <div class="step__report-header">
+        <ion-label class="step__header">
+          <span class="step__report-title">Você está recarregando</span>
+          <span class="step__report-value"><u class="text--dotted"
+              (click)="goToStep(2)">{{model.valueToTopup | currency:'BRL'}}</u></span>
+        </ion-label>
+      </div>
+
+      <div class="step__report">
+        <div class="step__report-item">
+          <span>Número do cartão:</span>
+          <span class="text--dotted" (click)="goToStep(TOPUP_STEPS.cardNumber)">{{model.cardNumber}}</span>
+        </div>
+
+        <div class="step__report-item">
+          <span>Pagando com:</span>
+          <span class="text--dotted" (click)="goToStep(TOPUP_STEPS.paymentMethod)">
+            <ng-container [ngSwitch]="model.paymentMethod">
+              <ng-container *ngSwitchCase="paymentMethods.checkingAccount">
+                Conta corrente
+              </ng-container>
+              <ng-container *ngSwitchCase="paymentMethods.creditCard">
+                Cartão de crédito
+              </ng-container>
+            </ng-container>
+          </span>
+        </div>
+
+        <div class="step__report-item">
+          <span>Data da recarga:</span>
+          <span> {{today | date:'dd/MM/yyyy'}}</span>
+        </div>
+
+        <div class="step__report-item">
+          <span>Tipo do cartão:</span>
+          <span class="text--dotted" (click)="goToStep(TOPUP_STEPS.cardType)">
+            <ng-container [ngSwitch]="model.cardType">
+              <ng-container *ngSwitchCase="cardTypes.BOM">
+                BOM
+              </ng-container>
+              <ng-container *ngSwitchCase="cardTypes.BilheteUnico">
+                Bilhete Único
+              </ng-container>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" [class.step--hidden]="step!==TOPUP_STEPS.password"
+      [class.step__password]="step===TOPUP_STEPS.password">
+      <ion-label class="step__header">
+        Digite a <span class="text--highlited">senha de 4 dígitos do seu cartão</span>
+      </ion-label>
+
+      <div class="step__password-inputs">
+        <ion-input class="step__password-input" clearOnEdit clearInput maxlength="1" type="number" inputmode="numeric"
+          #Field1 (ionInput)="gotoNextField(Field2)"></ion-input>
+        <ion-input class="step__password-input" clearOnEdit clearInput maxlength="1" type="number" inputmode="numeric"
+          #Field2 (ionInput)="gotoNextField(Field3)"></ion-input>
+        <ion-input class="step__password-input" clearOnEdit clearInput maxlength="1" type="number" inputmode="numeric"
+          #Field3 (ionInput)="gotoNextField(Field4)"></ion-input>
+        <ion-input class="step__password-input" clearOnEdit clearInput maxlength="1" type="number" inputmode="numeric"
+          #Field4 (ionInput)="showSuccessScreen()"></ion-input>
+      </div>
+    </section>
+    <section class="step" [class.step--hidden]="step!==TOPUP_STEPS.success"
+      [class.step__success]="step===TOPUP_STEPS.success">
+      <img src="assets/skater.svg" class="step__icon">
+
+      <ion-label class="step__header step__header--2x">
+        Recarga em andamento
+      </ion-label>
+
+      <div>
+        Recebemos seu pedido de recarga e ele já está sendo processado.
+      </div>
+
+      <div>
+        Aguarde alguns minutos e verifique essa transação no seu histórico de movimentações.
+      </div>
+    </section>
+  </ion-content>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button expand="full" class="topup__action" [disabled]="!isCurrentStepValid()" (click)="nextStep()"
+    [class.step--hidden]="step > TOPUP_STEPS.paymentMethod">Continuar
+  </ion-button>
+  <ion-button expand="full" class="topup__action" (click)="confirmPaymentClick(Field1)"
+    [class.step--hidden]="step!==TOPUP_STEPS.report">
+    Confirmar pagamento
+  </ion-button>
+  <ion-button expand="full" class="topup__action" (click)="goToHomePage()"
+    [class.step--hidden]="step!==TOPUP_STEPS.success">
+    OK
+  </ion-button>
+</ion-footer>

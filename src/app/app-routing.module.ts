@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'topup-bus-card',
+    loadChildren: () => import('./topup-bus-card/topup-bus-card.module').then( m => m.TopupBusCardPageModule)
+  },
 ];
 
 @NgModule({

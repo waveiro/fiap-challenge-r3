@@ -1,8 +1,19 @@
-<app-menu-item icon="chatbubbles-outline" text="Pix">
-</app-menu-item>
-<app-menu-item icon="phone-portrait-outline" text="Recarga de celular">
-</app-menu-item>
-<app-menu-item icon="bus-outline" text="Recarga transporte">
-</app-menu-item>
-<app-menu-item icon="swap-horizontal-outline" text="Dividir valor">
-</app-menu-item>
+<div class="menu-item">
+  <ion-icon class="menu-item__icon" name="chatbubbles-outline"></ion-icon>
+  <ion-label class="menu-item__text">Pix</ion-label>
+</div>
+
+<div class="menu-item">
+  <ion-icon class="menu-item__icon" name="phone-portrait-outline"></ion-icon>
+  <ion-label class="menu-item__text">Recarga de celular</ion-label>
+</div>
+
+<div class="menu-item" (click)="goToBusCardTopUp()">
+  <ion-icon class="menu-item__icon" name="bus-outline"></ion-icon>
+  <ion-label class="menu-item__text">Recarga transporte</ion-label>
+</div>
+
+<div class="menu-item">
+  <ion-icon class="menu-item__icon" name="swap-horizontal-outline"></ion-icon>
+  <ion-label class="menu-item__text">Dividir valor</ion-label>
+</div>
