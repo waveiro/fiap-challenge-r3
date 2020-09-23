@@ -1,6 +1,5 @@
 :host {
   display: flex;
-  gap: 10px;
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -17,6 +16,7 @@
   padding: 4px;
   height: 100px;
   color: #fadefd;
+  margin: 0 5px;
 
   &__icon {
     font-size: 28px;
