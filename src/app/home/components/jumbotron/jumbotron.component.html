@@ -11,8 +11,14 @@
   </div>
 
   <div class="jumbotron__footer">
-    <ion-icon class="jumbotron__icon" name="cash-outline"></ion-icon>
-    <p class="jumbotron__footer-content">Transferencia de R$ 5,00 feita para Ana Dias Correia</p>
+    <ng-container *ngIf="!message; else showLatestMessage">
+      <ion-icon class="jumbotron__icon" name="cash-outline"></ion-icon>
+      <p class="jumbotron__footer-content">Transferencia de R$ 5,00 feita para Ana Dias Correia</p>
+    </ng-container>
 
+    <ng-template #showLatestMessage>
+      <ion-icon class="jumbotron__icon" [name]="icon"></ion-icon>
+      <p class="jumbotron__footer-content">{{message}}</p>
+    </ng-template>
   </div>
 </div>

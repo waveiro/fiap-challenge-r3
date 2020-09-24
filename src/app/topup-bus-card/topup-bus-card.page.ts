@@ -1,6 +1,7 @@
 import { createOfflineCompileUrlResolver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { NavigationOptions } from '@ionic/angular/providers/nav-controller';
 import { TopupModel, PaymentMethod, CardType } from './enums';
 
 @Component({
@@ -29,6 +30,10 @@ export class TopupBusCardPage implements OnInit {
   valuesToTopUp = [10, 12, 15, 20, 25, 35, 40, 50, 100];
   today: number = Date.now();
   moveToFinalStep: boolean = false;
+  cardsTypeMap = new Map([
+    [CardType.BOM, "BOM"],
+    [CardType.BilheteUnico, "Bilhete Único"],
+  ])
 
   @ViewChild("cardNumberField") cardNumberField: any;
 
@@ -98,7 +103,13 @@ export class TopupBusCardPage implements OnInit {
   }
 
   goToHomePage() {
-    this.navCtrl.navigateForward("home");
+    let navigationExtras: NavigationOptions = {
+      queryParams: {
+        message: `Recarga de R$ ${this.model.valueToTopup},00 no cartão ${this.cardsTypeMap.get(this.model.cardType)} realizado com sucesso`,
+        icon: 'bus-outline'
+      }
+    };
+    this.navCtrl.navigateForward("home", navigationExtras);
   }
 }
 
